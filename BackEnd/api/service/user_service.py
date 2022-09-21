@@ -1,3 +1,4 @@
+from unicodedata import name
 from fastapi import HTTPException, status
 
 from api.model.user_model import User as UserModel
@@ -20,6 +21,8 @@ def create_user(user: user_schema.UserRegister):
     db_user = UserModel(
         username=user.username,
         email=user.email,
+        name=user.name,
+        surname=user.surname,
         password=get_password_hash(user.password)
     )
 
@@ -28,5 +31,7 @@ def create_user(user: user_schema.UserRegister):
     return user_schema.User(
         id = db_user.id,
         username = db_user.username,
-        email = db_user.email
+        email = db_user.email,
+        name = db_user.name,
+        surname = db_user.surname
     )
