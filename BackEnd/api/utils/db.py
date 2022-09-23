@@ -2,15 +2,15 @@ import peewee
 from contextvars import ContextVar
 from fastapi import Depends
 
-from api.utils.settings import Settings
+from api.utils.settings import EnvVariables
 
-settings = Settings()
+envVariables = EnvVariables()
 
-DB_NAME = settings.db_name
-DB_USER = settings.db_user
-DB_PASS = settings.db_pass
-DB_HOST = settings.db_host
-DB_PORT = settings.db_port
+DB_NAME = envVariables.db_name
+DB_USER = envVariables.db_user
+DB_PASS = envVariables.db_pass
+DB_HOST = envVariables.db_host
+DB_PORT = envVariables.db_port
 
 
 db_state_default = {"closed": None, "conn": None, "ctx": None, "transactions": None}

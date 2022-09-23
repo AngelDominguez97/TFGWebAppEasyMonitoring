@@ -1,10 +1,10 @@
 from elasticsearch import Elasticsearch
-from api.utils.settings import Settings
+from api.utils.settings import EnvVariables
 
-settings = Settings()
+envVariables = EnvVariables()
 
-ES_HOST = settings.es_host
-ES_PORT = settings.es_port
+ES_HOST = envVariables.es_host
+ES_PORT = envVariables.es_port
 
 class ElasticSearchConnection():
 

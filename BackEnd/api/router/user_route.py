@@ -13,12 +13,11 @@ from api.service import auth_service
 from api.utils.db import get_db
 
 
-user_router = APIRouter(prefix="/api")
+user_router = APIRouter(prefix="/api", tags=["Users"])
 
 
 @user_router.post(
     "/user/",
-    tags=["users"],
     status_code=status.HTTP_201_CREATED,
     response_model=user_schema.User,
     dependencies=[Depends(get_db)],
@@ -42,7 +41,6 @@ def create_user(user: user_schema.UserRegister = Body(...)):
 
 @user_router.post(
     "/login",
-    tags=["users"],
     response_model=Token
 )
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
@@ -59,3 +57,17 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     """
     access_token = auth_service.generate_token(form_data.username, form_data.password)
     return Token(access_token=access_token, token_type="bearer")
+
+@user_router.get(
+    "/me",
+    response_model=user_schema.User
+)
+async def read_users_me(current_user: user_schema.User = Depends(auth_service.get_current_user)):
+    return user_schema.User(
+        id = current_user.id,
+        username = current_user.username,
+        email = current_user.email,
+        name = current_user.name,
+        surname = current_user.surname,
+        userRole = current_user.userRole
+    )
