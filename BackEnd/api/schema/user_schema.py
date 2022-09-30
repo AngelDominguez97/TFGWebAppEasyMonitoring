@@ -30,6 +30,7 @@ class UserBase(BaseModel):
 
 
 class User(UserBase):
+
     id: int = Field(
         ...,
         example="5"

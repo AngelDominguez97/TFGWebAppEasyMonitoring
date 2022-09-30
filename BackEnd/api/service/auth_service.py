@@ -9,14 +9,14 @@ from passlib.context import CryptContext
 
 from api.model.user_model import User as UserModel
 from api.schema.token_schema import TokenData
-from api.utils.settings import Settings
+from api.utils.settings import EnvVariables
 
-settings = Settings()
+envVariables = EnvVariables()
 
 
-SECRET_KEY = settings.secret_key
+SECRET_KEY = envVariables.secret_key
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = settings.token_expire
+ACCESS_TOKEN_EXPIRE_MINUTES = envVariables.token_expire
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

@@ -1,4 +1,4 @@
-from api.model.esOperations_model import ApiAccessModel
+from api.model.elasticSearch_model import ApiAccessModel
 from api.utils.es import ElasticSearchConnection
 
 es = ElasticSearchConnection.get_ESConnection()

@@ -10,6 +10,7 @@ class Host(peewee.Model):
     hostIp = peewee.CharField(unique=True)
     user = peewee.ForeignKeyField(User, backref='hosts')
     registerDate = peewee.DateTimeField(default=datetime.now)
+    updateDate = peewee.DateTimeField(default=datetime.now)
 
     class Meta:
         database = db

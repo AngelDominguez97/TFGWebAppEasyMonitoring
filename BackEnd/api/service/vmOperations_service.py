@@ -4,14 +4,14 @@ from urllib import response
 from xmlrpc.client import ResponseError
 from paramiko import SSHClient
 import paramiko
-from api.utils.settings import Settings
-from api.utils.utils import Utils
+from api.utils.settings import EnvVariables
+from api.utils.operations_util import Utils
 import psutil
 
-settings = Settings()
+envVariables = EnvVariables()
 
-VM_USERNAME = settings.vm_username
-VM_PASSWORD = settings.vm_password
+VM_USERNAME = envVariables.vm_username
+VM_PASSWORD = envVariables.vm_password
 client = SSHClient()
 
 def rebootMachineByIP(ip: str):
