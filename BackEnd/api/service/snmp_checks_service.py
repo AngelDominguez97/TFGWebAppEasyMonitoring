@@ -1,4 +1,4 @@
-from api.service import host_service
+from api.service import elasticSearch_service, host_service
 from api.utils.settings import Oids
 from api.utils.snmpHandler_util import SnmpHandler
 from api.model.optionsEnum_model import ChooseSnmpVersion
@@ -74,6 +74,27 @@ async def check_all_devices(snmpVersion: ChooseSnmpVersion):
                 netOut=newNetOut[0]
             )
             # Aqui insertariamos los datos en el indice (IP) de elastic de cada host
+            elasticSearch_service.insert_last_check(lastCheck)
             insertLastCheck(lastCheck)
-        else:
-            return "El equipo esta DOWN"
+        elif newping == "DOWN":
+            newCpuUsage = "0"
+            newCpuName = "0"
+            newRamUsed = "0"
+            newRamFree = "0"
+            newRamCached = "0"
+            newNetIn = "0"
+            newNetOut = "0"
+            lastCheck = LastCheck(
+                host=h,
+                ping=newping,
+                cpuUsage=newCpuUsage,
+                cpuName=newCpuName,
+                ramUsed=newRamUsed,
+                ramFree=newRamFree,
+                ramCached=newRamCached,
+                netIn=newNetIn,
+                netOut=newNetOut
+            )
+            # Aqui insertariamos los datos en el indice (IP) de elastic de cada host
+            elasticSearch_service.insert_last_check(lastCheck)
+            insertLastCheck(lastCheck)

@@ -1,10 +1,11 @@
 from api.model.elasticSearch_model import ApiAccessModel
+from api.schema.last_check_schema import LastCheck
 from api.utils.es import ElasticSearchConnection
 
 es = ElasticSearchConnection.get_ESConnection()
 
-def insertApiAccess(indexName: str, data: ApiAccessModel):
-    response = es.index(index=indexName, document=data.json())
+def insert_last_check(last_check: LastCheck):
+    response = es.index(index=last_check.host.hostIp, document=last_check.json())    
     return response
 
 def getApiAccessByid(id: str):
