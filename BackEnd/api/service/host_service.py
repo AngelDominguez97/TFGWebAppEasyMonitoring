@@ -3,7 +3,7 @@ from api.model.host_model import Host as HostModel
 from api.schema.host_schema import Host, HostBase
 from api.schema.user_schema import User
 from api.model.user_model import User as UserModel
-from api.service import auth_service
+from api.service import auth_service, elasticSearch_service
 
 def create_host(host: HostBase, current_user: User):
     get_host = HostModel.filter((HostModel.hostName == host.hostName) | (HostModel.hostIp == host.hostIp)).first()
@@ -48,8 +48,9 @@ def update_host(host: Host):
 
 def delete_host(hostId: int):
     try:
-        user_to_delete = HostModel.get_by_id(hostId)
-        user_to_delete.delete_instance(recursive=True)
+        host_to_delete = HostModel.get_by_id(hostId)
+        elasticSearch_service.deleteIndexApiAccess(host_to_delete.hostIp)
+        host_to_delete.delete_instance(recursive=True)
         return "Host was deleted succesfully"
     except:
         return "The host delete failed"
