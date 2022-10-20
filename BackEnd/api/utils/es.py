@@ -12,7 +12,7 @@ class ElasticSearchConnection():
     def get_ESConnection():
         try:
             es = Elasticsearch([ES_HOST + ES_PORT])
+            return es
             # yield?        
-        finally:
-            # if not es:  Me falta ver que pasa cuando no devuelve una conexion correcta
-                return es
+        except Exception as ex:
+            return ex

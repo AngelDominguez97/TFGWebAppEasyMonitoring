@@ -3,8 +3,8 @@ from api.utils.es import ElasticSearchConnection
 
 es = ElasticSearchConnection.get_ESConnection()
 
-def insertApiAccess(data: ApiAccessModel):
-    response = es.index(index='access', document=data.json())
+def insertApiAccess(indexName: str, data: ApiAccessModel):
+    response = es.index(index=indexName, document=data.json())
     return response
 
 def getApiAccessByid(id: str):
