@@ -8,6 +8,7 @@ from api.router.checks_handler_router import checksHandler_router
 from api.router.host_router import host_router
 from api.utils.scheduler_util import app as app_rocketry
 from api.utils.exception_handler_util import HandlerGeneralException
+from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 import uvicorn
 
@@ -18,6 +19,14 @@ app.include_router(elasticSearch_router)
 app.include_router(user_router)
 app.include_router(esStatus_router)
 app.include_router(host_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Server(uvicorn.Server):
     """Customized uvicorn.Server

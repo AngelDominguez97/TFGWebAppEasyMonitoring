@@ -19,7 +19,7 @@ user_router = APIRouter(prefix="/api", tags=["Users"])
 
 
 @user_router.post(
-    "/user/",
+    "/user/signin",
     status_code=status.HTTP_201_CREATED,
     response_model=user_schema.User,
     dependencies=[Depends(get_db)],
@@ -107,7 +107,7 @@ def get_user_byid(userId: int):
 
 
 @user_router.get(
-    "/allusers",
+    "/user/allusers",
     status_code=status.HTTP_200_OK,
     response_model=List[user_schema.User],
     dependencies=[Depends(get_db)],
@@ -127,7 +127,7 @@ def get_all_users():
 
 
 @user_router.post(
-    "/login",
+    "/user/login",
     response_model=Token
 )
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
