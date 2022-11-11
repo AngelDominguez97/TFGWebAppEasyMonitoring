@@ -11,10 +11,9 @@ import { TokenService } from 'src/app/services/token/token.service';
 export class HeaderComponent implements OnInit {
 
   constructor(
-      private tokenService: TokenService,
-      private router: Router,
-      private authService: AuthService
-    ) { }
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,5 +21,9 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['login'])
+  }
+
+  toggleSideBar(event: any) {
+    document.body.classList.toggle('sb-sidenav-toggled');
   }
 }

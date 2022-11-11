@@ -39,16 +39,13 @@ export class InterceptorService implements HttpInterceptor{
     });
 
     return next.handle(request).pipe(map((event: HttpEvent<any>) => {
-      if (event instanceof HttpResponse) {
-        console.log('event--->>>', event);
-      }
       return event
       }),
       catchError((error: HttpErrorResponse) => {
-        debugger;
         if (error.status === 401) {
-          if (error.error.detail === 'invalid_token') {
+          if (error.error.detail === 'Could not validate credentials') {
             this.authService.logout();
+            alert('La sesion ha caducado')
             this.router.navigate(['/login']);
           }
         }

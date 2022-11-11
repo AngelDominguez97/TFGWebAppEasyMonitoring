@@ -1,8 +1,8 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
   <!-- Navbar Brand-->
-  <a class="navbar-brand ps-3" href="index.html"><i class="bi bi-display pe-2"></i>Easy Monitoring</a>
+  <a class="navbar-brand ps-3" routerLink="/main"><i class="bi bi-display pe-2"></i>Easy Monitoring</a>
   <!-- Sidebar Toggle-->
-  <button class="btn btn-link btn-lg order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="bi bi-list"></i></button>
+  <button class="btn btn-link btn-lg order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" (click)="toggleSideBar($event)" href="#!"><i class="bi bi-list"></i></button>
   <!-- Navbar-->
   <ul class="navbar-nav ms-auto ms-md-100 me-3 me-lg-8">
       <li class="nav-item dropdown ">

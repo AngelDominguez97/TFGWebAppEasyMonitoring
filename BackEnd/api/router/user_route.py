@@ -67,12 +67,12 @@ def update_user(user: user_schema.User = Body(...)):
 
 
 @user_router.delete(
-    "/user/delete{userId}",
+    "/user/delete/{userId}",
     status_code=status.HTTP_200_OK,
     dependencies=[Depends(get_db)],
     summary="Delete an existing user by its id"
 )
-def update_user(userId: str):
+def delete_user(userId: str):
     """
     ## Delete an existing user in the app by its id
 

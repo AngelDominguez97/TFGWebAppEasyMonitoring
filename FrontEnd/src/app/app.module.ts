@@ -13,6 +13,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainComponent } from './components/main/main.component';
 import { InterceptorService } from './services/interceptor-service/interceptor-service.service';
 import { ErrorComponent } from './components/error/error/error.component';
+import { UsersGestionComponent } from './components/users-gestion/users-gestion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material-module';
 
 @NgModule({
   declarations: [
@@ -23,14 +26,18 @@ import { ErrorComponent } from './components/error/error/error.component';
     RegisterComponent,
     SidebarComponent,
     MainComponent,
-    ErrorComponent
+    ErrorComponent,
+    UsersGestionComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     {

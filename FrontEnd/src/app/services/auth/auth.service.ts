@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { buffer, catchError, Observable, tap, throwError } from 'rxjs';
+import { UserModel } from 'src/app/models/user.model';
 import { ApiService } from '../api/api.service';
 import { TokenService } from '../token/token.service';
 
@@ -18,6 +19,7 @@ const HTTP_OPTIONS = {
     providedIn: 'root'
 })
 export class AuthService {
+    user!: UserModel;
     private static handleError(error: HttpErrorResponse): any {
         if (error.error instanceof ErrorEvent) {
             console.error('An error occured: ', error.error.message);
@@ -31,10 +33,6 @@ export class AuthService {
             'Something bad Hapenned: please try again later.'
             ) 
         );
-    }
-
-    private static log(message: string): any {
-        console.log(message);
     }
 
     constructor(private http: HttpClient, 
@@ -65,9 +63,31 @@ export class AuthService {
     register(data: any): Observable<any> {
         return this.http.post<any>(API_URL + '/user/signin', data).pipe(tap({
             next: (v: any) => {
-                AuthService.log(v);
+                
             }, 
             error: (e) => AuthService.handleError(e)
         }));
+    }
+
+    me(): Observable<any>{
+        return this.http.get<any>(API_URL + 'user/me').pipe(
+            tap(res => {
+                this.user = res as UserModel;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(() => new Error(error.message));
+            })
+        );
+    }
+
+    currentUser() {
+        return this.user;
+    }
+
+    isAdmin() {
+        if (this.user) {
+            return this.user.userRole === 'admin';
+        }   
+        return '';
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { PreviousRouteService } from 'src/app/services/previous-route/previous-route.service';
 
 export class MyErrorStateMatcher implements MyErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService, 
     private router: Router, 
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private previousRouteService: PreviousRouteService
     ) { }
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   onFormSubmit(): void {
-    if (this.loginForm.value.username === null || this.loginForm.value.password === null){
+    if ((this.loginForm.value.username === null || this.loginForm.value.password === null) || (this.loginForm.value.username === "" || this.loginForm.value.password === "")){
       this.noData = true;
     } else {
       this.noData = false;
