@@ -25,7 +25,7 @@ user_router = APIRouter(prefix="/api", tags=["Users"])
     dependencies=[Depends(get_db)],
     summary="Create a new user"
 )
-def create_user(user: user_schema.UserRegister = Body(...)):
+def create_user(user: user_schema.UserRegister = Body(...), current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Create a new user in the app
 
@@ -48,7 +48,7 @@ def create_user(user: user_schema.UserRegister = Body(...)):
     dependencies=[Depends(get_db)],
     summary="Update an existing user"
 )
-def update_user(user: user_schema.User = Body(...)):
+def update_user(user: user_schema.User = Body(...), current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Update an existing user in the app
 
@@ -72,7 +72,7 @@ def update_user(user: user_schema.User = Body(...)):
     dependencies=[Depends(get_db)],
     summary="Delete an existing user by its id"
 )
-def delete_user(userId: str):
+def delete_user(userId: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Delete an existing user in the app by its id
 
@@ -93,7 +93,7 @@ def delete_user(userId: str):
     dependencies=[Depends(get_db)],
     summary="Get one user registered in the database"
 )
-def get_user_byid(userId: int):
+def get_user_byid(userId: int, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Get one user registered in the app by its id
 
@@ -113,7 +113,7 @@ def get_user_byid(userId: int):
     dependencies=[Depends(get_db)],
     summary="Get all users in the database"
 )
-def get_all_users():
+def get_all_users(current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Get all users registered in the app
 

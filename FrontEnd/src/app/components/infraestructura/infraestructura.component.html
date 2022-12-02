@@ -1,0 +1,77 @@
+<app-header></app-header>
+<div id="layoutSidenav">
+    <app-sidebar></app-sidebar>
+    <div id="layoutSidenav_content">
+        <div class="container-fluid">
+            <div class="row">
+                <p class="h1 mt-2">Infraestructura actual</p>
+            </div>
+            <div class="row">
+                <div class="col-10 col-xs-6">
+                    <mat-form-field>
+                        <mat-label>Filtrar campos</mat-label>
+                        <input matInput placeholder="Filtro" (keyup)="filterChange($event)">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> ID </th>
+                      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hostName">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Host Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.hostName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hostIp">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Host IP </th>
+                      <td mat-cell *matCellDef="let element"> {{element.hostIp}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="ping">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ping}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cpuUsage">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Uso Cpu </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cpuUsage}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cpuName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Nombre Cpu </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cpuName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="ramUsed">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Ram en uso </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ramUsed}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="ramFree">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Ram Libre </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ramFree}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="ramCached">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Ram Cacheada </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ramCached}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="netIn">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Trafico in </th>
+                        <td mat-cell *matCellDef="let element"> {{element.netIn}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="netOut">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Trafico out </th>
+                        <td mat-cell *matCellDef="let element"> {{element.netOut}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Info">
+                        <th mat-header-cell *matHeaderCellDef class="text-center"> Info </th>
+                        <td mat-cell *matCellDef="let element" class="text-center"> 
+                            <button class="btn btn-secondary btn-sm" (click)="functionEdit(element)">Ver Info</button>
+                        </td>
+                      </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.background-table-up]="getStatus(row)" [class.background-table-down]="!getStatus(row)"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButttons></mat-paginator>                 
+            </div>       
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>

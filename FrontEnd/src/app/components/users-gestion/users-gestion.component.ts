@@ -56,14 +56,13 @@ export class UsersGestionComponent implements OnInit{
   }
 
   functionEdit(element: any){
-    console.log(element)
+    return element;
   }
 
   functionDelete(id: number){
-    debugger;
     this.userService.deleteUserById(id).subscribe({
       next: (res: any) => {
-        alert(res)
+        this.getUsers();
       }, 
       error: (e) => {
         // Redirigir a la pagina de error

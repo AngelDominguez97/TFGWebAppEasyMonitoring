@@ -33,7 +33,6 @@ export class UserService {
         alert(res);
       }),
       catchError((error: HttpErrorResponse) => {
-        debugger;
         return throwError(() => new Error(error.message));
       })
     );

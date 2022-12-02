@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div id="layoutSidenav">
+    <app-sidebar></app-sidebar>
+    <div id="layoutSidenav_content">
+        <div class="container-fluid">
+            <div class="row">
+                <p class="h1 mt-2">Gestion de hosts</p>
+            </div>
+            <div class="row">
+                <div class="col-10 col-xs-6">
+                    <mat-form-field>
+                        <mat-label>Filtrar campos</mat-label>
+                        <input matInput placeholder="Filtro" (keyup)="filterChange($event)">
+                    </mat-form-field>
+                </div>
+                <div class="col-2 col-xs-6 d-flex align-items-center">
+                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewHost">Añadir host</button>
+                </div>
+                <app-modal-new-host></app-modal-new-host>
+            </div>
+            <div class="row">
+                <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> ID </th>
+                      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hostName">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Host Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.hostName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="hostIp">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Host IP </th>
+                      <td mat-cell *matCellDef="let element"> {{element.hostIp}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="userId">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> User Id </th>
+                        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+                      </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
+                        <td mat-cell *matCellDef="let element" class="text-center"> 
+                            <button class="btn btn-info btn-sm" (click)="functionEdit(element)">Editar</button> 
+                            <button class="btn btn-dark btn-sm ms-1" (click)="functionDelete(element.id)">Eliminar</button>
+                        </td>
+                      </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButttons></mat-paginator>                 
+            </div>       
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>

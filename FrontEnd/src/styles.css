@@ -11700,5 +11700,18 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+
+.background-table-up{
+  background-color: #A2FFA3 !important;
+}
+
+.background-table-down{
+  background-color: #FFA2A2 !important;
+}
+
+.background-button-corporative{
+  background-color: #B58EFF;
+}
+ 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

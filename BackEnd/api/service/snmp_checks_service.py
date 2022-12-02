@@ -1,3 +1,4 @@
+from api.schema.host_schema import Host
 from api.service import elasticSearch_service, host_service
 from api.utils.settings import Oids
 from api.utils.snmpHandler_util import SnmpHandler
@@ -98,3 +99,25 @@ async def check_all_devices(snmpVersion: ChooseSnmpVersion):
             # Aqui insertariamos los datos en el indice (IP) de elastic de cada host
             elasticSearch_service.insert_last_check(lastCheck)
             insertLastCheck(lastCheck)
+
+def get_all_last_checks():
+    last_check_list = []
+    for lc in LastCheckModel.select():     
+        last_check = LastCheck(
+            host = Host(
+                id = lc.host.id, 
+                hostName = lc.host.hostName, 
+                hostIp = lc.host.hostIp, 
+                userId = lc.host.user.id,
+            ),
+            ping = lc.ping,
+            cpuUsage = lc.cpuUsage,
+            cpuName = lc.cpuName,
+            ramUsed = lc.ramUsed,
+            ramFree = lc.ramFree,
+            ramCached = lc.ramCached,
+            netIn = lc.netIn,
+            netOut = lc.netOut
+        )
+        last_check_list.append(last_check)
+    return last_check_list

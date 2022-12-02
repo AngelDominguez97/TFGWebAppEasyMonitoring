@@ -1,0 +1,15 @@
+<div mat-dialog-content [formGroup]="updateHostForm">
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.hostName" placeholder="Nombre del host" formControlName="hostName">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.hostIp" placeholder="Ip del host" formControlName="hostIp">
+    </mat-form-field>
+    <div class="mb-3" *ngIf="noData">
+        <div class="alert alert-warning" role="alert">Introduce datos</div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-secondary" (click)="closeDialog()">Cerrar</button>
+    <button mat-button mat-dialog-close class="btn btn-info ms-4" (click)="updateHost()">Actualizar</button>
+</div>

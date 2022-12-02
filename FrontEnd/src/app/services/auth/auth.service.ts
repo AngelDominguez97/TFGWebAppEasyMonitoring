@@ -42,6 +42,7 @@ export class AuthService {
 
     login(loginData: any): Observable<any> {
         this.tokenService.removeToken();
+        debugger;
         const body = new HttpParams()
             .set('username', loginData.username)
             .set('password', loginData.password)

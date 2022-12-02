@@ -44,7 +44,7 @@ def create_host(host: host_schema.HostBase = Body(...), current_user: user_schem
     dependencies=[Depends(get_db)],
     summary="Update an existing host"
 )
-def update_host(host: host_schema.Host = Body(...)):
+def update_host(host: host_schema.Host = Body(...), current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Update a new host in the app
 
@@ -65,7 +65,7 @@ def update_host(host: host_schema.Host = Body(...)):
     dependencies=[Depends(get_db)],
     summary="Delete an existing host"
 )
-def delete_host(hostId: str):
+def delete_host(hostId: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Delete one host in the app
 
@@ -85,7 +85,7 @@ def delete_host(hostId: str):
     dependencies=[Depends(get_db)],
     summary="select an existing host by id"
 )
-def select_host(hostId: str):
+def select_host(hostId: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Select one host in the app
 
@@ -106,7 +106,7 @@ def select_host(hostId: str):
     dependencies=[Depends(get_db)],
     summary="Get all hosts in the database"
 )
-def get_all_users():
+def get_all_users(current_user: user_schema.User = Depends(auth_service.get_current_user)):
     """
     ## Get all hosts registered in the app
 

@@ -16,6 +16,10 @@ import { ErrorComponent } from './components/error/error/error.component';
 import { UsersGestionComponent } from './components/users-gestion/users-gestion.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
+import { HostsGestionComponent } from './components/hosts-gestion/hosts-gestion.component';
+import { InfraestructuraComponent } from './components/infraestructura/infraestructura.component';
+import { ModalHostComponent } from './components/modal-host/modal-host.component';
+import { ModalNewHostComponent } from './components/modal-new-host/modal-new-host.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { MaterialModule } from './material-module';
     SidebarComponent,
     MainComponent,
     ErrorComponent,
-    UsersGestionComponent
+    UsersGestionComponent,
+    HostsGestionComponent,
+    InfraestructuraComponent,
+    ModalHostComponent,
+    ModalNewHostComponent,
     
   ],
   imports: [

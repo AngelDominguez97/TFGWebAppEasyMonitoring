@@ -1,7 +1,8 @@
 from urllib import response
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi import status
-from api.service import elasticSearch_service
+from api.schema import user_schema
+from api.service import auth_service, elasticSearch_service
 from api.model.elasticSearch_model import ApiAccessModel
 
 elasticSearch_router = APIRouter(prefix="/api/elasticSearch", tags=["elasticSearch"])
@@ -11,7 +12,7 @@ elasticSearch_router = APIRouter(prefix="/api/elasticSearch", tags=["elasticSear
     status_code=status.HTTP_201_CREATED,
     summary="Insert every access that any user make to an API function"
 )
-def indexApiAccess(data: ApiAccessModel):
+def indexApiAccess(data: ApiAccessModel, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.insertApiAccess(data)
     return response
 
@@ -21,7 +22,7 @@ def indexApiAccess(data: ApiAccessModel):
     status_code=status.HTTP_202_ACCEPTED,
     summary="Getting an index from elastic search using an id"
 )   
-def getApiAccessByid(id: str):
+def getApiAccessByid(id: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.getApiAccessByid(id)
     return response
 
@@ -30,7 +31,7 @@ def getApiAccessByid(id: str):
     status_code=status.HTTP_202_ACCEPTED,
     summary="Refresh an index from elastic search"
 )   
-def refreshApiAccess(index: str):
+def refreshApiAccess(index: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.refreshApiAccess(index)
     return response
 
@@ -39,7 +40,7 @@ def refreshApiAccess(index: str):
     status_code=status.HTTP_202_ACCEPTED,
     summary="Search all the items by an index from elastic search"
 ) 
-def searchAllApiAccess(index: str):
+def searchAllApiAccess(index: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.searchAllApiAccess(index)
     return response
 
@@ -48,7 +49,7 @@ def searchAllApiAccess(index: str):
     status_code=status.HTTP_200_OK,
     summary="Update an existing document from an index"
 ) 
-def searchApiAccessByUser(user: str):
+def searchApiAccessByUser(user: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.searchApiAccessByUser(user)
     return response
 
@@ -58,7 +59,7 @@ def searchApiAccessByUser(user: str):
     summary="Update an existing document from an index"
 ) 
 
-def updateApiAccessByid(id: str, index: str, data: ApiAccessModel):
+def updateApiAccessByid(id: str, index: str, data: ApiAccessModel, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.updateApiAccessByid(id, index, data)
     return response
 
@@ -67,7 +68,7 @@ def updateApiAccessByid(id: str, index: str, data: ApiAccessModel):
     status_code=status.HTTP_200_OK,
     summary="Delete an existing document"
 ) 
-def deleteDocumentAccess(id: str):
+def deleteDocumentAccess(id: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.deleteDocumentApiAccess(id)
     return response
 
@@ -76,6 +77,6 @@ def deleteDocumentAccess(id: str):
     status_code=status.HTTP_200_OK,
     summary="Delete an existing index"
 ) 
-def deleteIndex(index: str):
+def deleteIndex(index: str, current_user: user_schema.User = Depends(auth_service.get_current_user)):
     response = elasticSearch_service.deleteIndex(index)
     return response

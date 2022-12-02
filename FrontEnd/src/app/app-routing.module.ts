@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { ErrorComponent } from './components/error/error/error.component';
 import { UsersGestionComponent } from './components/users-gestion/users-gestion.component';
+import { HostsGestionComponent } from './components/hosts-gestion/hosts-gestion.component';
+import { InfraestructuraComponent } from './components/infraestructura/infraestructura.component';
 
 const routes: Routes = [
   {
@@ -17,8 +19,18 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'infraestructura',
+    component: InfraestructuraComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: 'users/Gestion',
     component: UsersGestionComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'hosts/Gestion',
+    component: HostsGestionComponent,
     canActivate: [AuthGuardService]
   },
   { 
