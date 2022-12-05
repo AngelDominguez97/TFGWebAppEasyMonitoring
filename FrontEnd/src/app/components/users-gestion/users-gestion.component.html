@@ -14,10 +14,10 @@
           </mat-form-field>
         </div>
         <div class="col-2 col-xs-6 d-flex align-items-center">
-          <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalUsers">Añadir
+          <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewUser">Añadir
             usuario</button>
         </div>
-
+        <app-modal-new-user></app-modal-new-user>
       </div>
       <div class="row">
         <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">

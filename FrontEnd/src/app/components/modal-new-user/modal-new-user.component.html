@@ -1,0 +1,47 @@
+<div class="modal fade" id="modalNewUser" tabindex="-1" aria-labelledby="modalNewUser" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Añadir Usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="newUserForm" (ngSubmit)="createUser()" class="needs-validation">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Nombre del usuario</label>
+                            <input class="form-control" id="name" formControlName="name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="surname" class="form-label">Apellidos del usuario</label>
+                            <input class="form-control" id="surname" formControlName="surname">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <label for="email" class="form-label">Email del usuario</label>
+                            <input class="form-control" id="email" formControlName="email">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label for="username" class="form-label">UserName del usuario</label>
+                            <input class="form-control" id="username" formControlName="username">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="password" class="form-label">contraseña del usuario</label>
+                            <input class="form-control" id="password" formControlName="password">
+                        </div>
+                    </div>
+                    <div class="mt-3" *ngIf="noData">
+                        <div class="alert alert-warning" role="alert">Introduce los datos de usuario</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" #closebutton data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-info">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
