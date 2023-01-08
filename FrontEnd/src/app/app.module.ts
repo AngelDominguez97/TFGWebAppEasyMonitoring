@@ -22,6 +22,7 @@ import { ModalHostComponent } from './components/modal-host/modal-host.component
 import { ModalNewHostComponent } from './components/modal-new-host/modal-new-host.component';
 import { ModalNewUserComponent } from './components/modal-new-user/modal-new-user.component';
 import { ModalUserComponent } from './components/modal-user/modal-user.component';
+import { ModalHostMonitorComponent } from './components/modal-host-monitor/modal-host-monitor.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ModalUserComponent } from './components/modal-user/modal-user.component
     ModalNewHostComponent,
     ModalNewUserComponent,
     ModalUserComponent,
+    ModalHostMonitorComponent,
     
   ],
   imports: [

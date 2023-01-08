@@ -49,7 +49,7 @@ def update_host(host: Host):
 def delete_host(hostId: int):
     try:
         host_to_delete = HostModel.get_by_id(hostId)
-        elasticSearch_service.deleteIndexApiAccess(host_to_delete.hostIp)
+        #elasticSearch_service.deleteIndexApiAccess(host_to_delete.hostIp)
         host_to_delete.delete_instance(recursive=True)
         return "Host was deleted succesfully"
     except:

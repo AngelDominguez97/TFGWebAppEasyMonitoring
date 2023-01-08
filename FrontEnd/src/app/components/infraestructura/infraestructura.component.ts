@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +8,7 @@ import { LastCheckModel } from 'src/app/models/lastcheck.model';
 import { HostService } from 'src/app/services/host/host.service';
 import { LastcheckService } from 'src/app/services/lastcheck/lastcheck.service';
 import { PreviousRouteService } from 'src/app/services/previous-route/previous-route.service';
+import { ModalHostMonitorComponent } from '../modal-host-monitor/modal-host-monitor.component';
 
 @Component({
   selector: 'app-infraestructura',
@@ -25,6 +27,7 @@ export class InfraestructuraComponent implements OnInit {
   constructor(
     private lastCheckService: LastcheckService,
     private previousRouteService: PreviousRouteService,
+    public dialog: MatDialog,
     ) { }
   
     ngOnInit(): void {
@@ -52,7 +55,11 @@ export class InfraestructuraComponent implements OnInit {
   }
 
   functionEdit(element: any){
-    console.log(element)
+    const dialog = this.dialog.open(ModalHostMonitorComponent, {
+      width: '1000px',
+      disableClose: true,
+      data: element
+    });
   }
 
   functionDelete(id: number){

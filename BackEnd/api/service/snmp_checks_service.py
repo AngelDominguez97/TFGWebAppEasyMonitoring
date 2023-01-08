@@ -1,10 +1,13 @@
+from operator import concat
 from api.schema.host_schema import Host
 from api.service import elasticSearch_service, host_service
+from api.utils.operations_util import Utils
 from api.utils.settings import Oids
 from api.utils.snmpHandler_util import SnmpHandler
 from api.model.optionsEnum_model import ChooseSnmpVersion
 from api.model.lastCheck_model import LastCheck as LastCheckModel
 from api.schema.last_check_schema import LastCheck
+from datetime import datetime, timezone
 import subprocess 
 
 oids = Oids()
@@ -68,11 +71,12 @@ async def check_all_devices(snmpVersion: ChooseSnmpVersion):
                 ping=newping,
                 cpuUsage=newCpuUsage[0],
                 cpuName=newCpuName[0],
-                ramUsed=newRamUsed[0],
-                ramFree=newRamFree[0],
-                ramCached=newRamCached[0],
-                netIn=newNetIn[0],
-                netOut=newNetOut[0]
+                ramUsed=Utils.getMbByBytes(newRamUsed[0]),
+                ramFree=Utils.getMbByBytes(newRamFree[0]),
+                ramCached=Utils.getMbByBytes(newRamCached[0]),
+                netIn=Utils.getMbBybits(newNetIn[0]),
+                netOut=Utils.getMbBybits(newNetOut[0]),
+                timestamp=datetime.utcnow()
             )
             # Aqui insertariamos los datos en el indice (IP) de elastic de cada host
             elasticSearch_service.insert_last_check(lastCheck)
@@ -94,7 +98,8 @@ async def check_all_devices(snmpVersion: ChooseSnmpVersion):
                 ramFree=newRamFree,
                 ramCached=newRamCached,
                 netIn=newNetIn,
-                netOut=newNetOut
+                netOut=newNetOut,
+                timestamp=datetime.utcnow()
             )
             # Aqui insertariamos los datos en el indice (IP) de elastic de cada host
             elasticSearch_service.insert_last_check(lastCheck)
@@ -117,7 +122,8 @@ def get_all_last_checks():
             ramFree = lc.ramFree,
             ramCached = lc.ramCached,
             netIn = lc.netIn,
-            netOut = lc.netOut
+            netOut = lc.netOut,
+            timestamp=datetime.now()
         )
         last_check_list.append(last_check)
     return last_check_list

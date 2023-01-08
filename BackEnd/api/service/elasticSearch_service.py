@@ -5,6 +5,8 @@ from api.utils.es import ElasticSearchConnection
 es = ElasticSearchConnection.get_ESConnection()
 
 def insert_last_check(last_check: LastCheck):
+    aux = last_check.json()
+    print(aux)
     response = es.index(index=last_check.host.hostIp, document=last_check.json())    
     return response
 

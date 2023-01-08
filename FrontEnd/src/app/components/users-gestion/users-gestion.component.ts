@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserModel } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { PreviousRouteService } from 'src/app/services/previous-route/previous-route.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
@@ -25,6 +26,7 @@ export class UsersGestionComponent implements OnInit{
   constructor(
     private userService: UserService,
     private previousRouteService: PreviousRouteService,
+    public authService: AuthService,
     public dialog: MatDialog,
     ) { }
   
@@ -53,7 +55,6 @@ export class UsersGestionComponent implements OnInit{
   }
 
   functionEdit(element: any){
-    debugger;
     const dialog = this.dialog.open(ModalUserComponent, {
       width: '250px',
       disableClose: true,

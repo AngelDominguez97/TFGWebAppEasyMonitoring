@@ -86,6 +86,7 @@ export class AuthService {
     }
 
     isAdmin() {
+        debugger;
         if (this.user) {
             return this.user.userRole === 'admin';
         }   

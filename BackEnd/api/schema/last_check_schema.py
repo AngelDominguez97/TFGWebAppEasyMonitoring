@@ -1,5 +1,4 @@
-from atexit import register
-from typing import Optional
+from datetime import datetime
 from pydantic import BaseModel
 from pydantic import Field
 from api.schema.host_schema import Host
@@ -44,4 +43,9 @@ class LastCheck(BaseModel):
     netOut: str = Field(
         ...,
         example="4.52 MB"
+    )
+
+    timestamp: datetime = Field(
+        ...,
+        example=datetime.now()
     )
