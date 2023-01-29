@@ -16,5 +16,4 @@ COPY ./.env /code/.env
 
 COPY ./SSL /code/SSL
 
-#uvicorn main:app --port 8432 -ssl-keyfile=./SSL/server.key --ssl-certificate=./SSL/server.crt
 CMD ["uvicorn", "main:app", "--port ", "8432", "-ssl-keyfile", "./SSL/server.key", "--ssl-certificate", "./SSL/server.crt"]
